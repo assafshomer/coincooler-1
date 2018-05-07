@@ -14,7 +14,6 @@ AJAXON = true
 DEBUG = false
 HOT = ConnectionHelper::internet_connection?
 PBKDF2_ITERATIONS = PROD ? 1_000_000 : 10
-ENCRYPTION_LIBRARY = CryptoHelper::check_pbkdf2
 ID = rand(100000..999999)
 FLASH_DELAY_SECONDS = PI ? 5 : 3
 FLASH_FADE_SECONDS = 2

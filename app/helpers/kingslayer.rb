@@ -1,10 +1,10 @@
 module Kingslayer
-  
+
   require 'openssl'
   require 'base64'
 
   # Handles PKCS#5 compliant AES-256 encryption in CBC mode with a random IV. The encryption key is derived from a password using PBKDF2_HMAC with a 64 bit SALT and many iterations. The number of iterations can be set and should be hardware dependent. The idea is to dial the number of iterations so that it takes as long as possible to encrypt on a particular hardware while still being tollerable for the user.
-  #     
+  #
   # ### Default Encryption
   #
   #     cipher = Kingslayer::AES.new('Pa$$woRd')
@@ -38,16 +38,16 @@ module Kingslayer
 
     attr_reader :cipher, :password, :iter, :hexkey, :hexiv
 
-    def initialize(opts={})
+    def initialize(opts = {})
       @password = opts[:password]
-      iter = [(opts[:iter]).to_i,1].max       
-      if @password        
-        @iter=iter       
+      iter = [(opts[:iter]).to_i,1].max
+      if @password
+        @iter=iter
       else
         raise Kingslayer.wrong_ks_init_message if opts[:iter]
         @password = generate_256_bit_key
         @iter = 1
-      end      
+      end
       @cipher = OpenSSL::Cipher::AES256.new('CBC')
     end
 
@@ -78,7 +78,7 @@ module Kingslayer
 
     def encrypt_file(plaintext_file_path, encrypted_file_path)
       plaintext=File.read(plaintext_file_path)
-      ciphertext=encrypt(plaintext)      
+      ciphertext=encrypt(plaintext)
       File.write(encrypted_file_path,ciphertext)
       Rails.logger.info('Successfully encrypted '+plaintext_file_path)
     end
@@ -127,7 +127,7 @@ module Kingslayer
         OpenSSL::Cipher::AES256.new(:CBC).random_key.unpack('H*')[0]
       end
 
-      def proper_256_key?(string)        
+      def proper_256_key?(string)
         string.match(/^\h{64}$/).to_s == string
       end
 
