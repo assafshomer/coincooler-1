@@ -112,21 +112,25 @@ module FilesHelper
 	end
 
 	def nuke_all_uploads
-		FileUtils.rm_rf(jquery_uploads_dir)
+		secure_delete jquery_uploads_dir
 	end
 
 	def clear_stale_uploads
     nuke_stale_uploads
-    Upload.all.each {|u| u.destroy unless file_there?(u.upload.path)} if Upload.count>0
+    Upload.all.each {|u| u.destroy unless file_there?(u.upload.path)} if Upload.count.positive?
   end
 
 	def nuke_all_uploads_on_rp
   	nuke_all_uploads if PI
   end
 
-	def nuke_coldstorage_dirs_on_usb
+	def nuke_coldstorage_files
+		clear_coldstorage_dirs_on_usb
+		clear_coldstorage_files_locally
+	end
+
+	def clear_coldstorage_dirs_on_usb
 		secure_delete "#{usb_path}#{cold_storage_directory_prefix}"
-		nuke_all_uploads
 	end
 
 	def clear_coldstorage_files_locally

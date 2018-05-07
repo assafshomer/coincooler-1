@@ -4,15 +4,17 @@ include FilesHelper
 include CryptoHelper
 
 describe "quartermaster" do
-	before do
-		nuke_coldstorage_dirs_on_usb
+	before(:all) do
+		nuke_coldstorage_files
 	end
+
 	describe "init" do
 		it {expect {Quartermaster.new([1])}.to raise_error(ArgumentError, /wrong number of arguments/)}
 		it {expect {Quartermaster.new}.to raise_error(ArgumentError, /wrong number of arguments/)}
 		it {expect {Quartermaster.new([1],'a',{n:3, k:2}) }.to raise_error(RuntimeError, 'Invalid keys')}
 		it {expect {Quartermaster.new([],'b',{n:3, k:2}) }.to raise_error(RuntimeError, 'Invalid keys')}
 	end
+
 	describe "quartermaster" do
 		let!(:keygen) { KeyGenerator.new(2) }
 		let!(:size) { keygen.howmany }
@@ -50,6 +52,7 @@ describe "quartermaster" do
 				end
 			end
 		end
+
 		describe "save_unencrypted_private_keys" do
 			it { expect{qm.save_unencrypted_private_keys}.not_to raise_error }
 			before { qm.save_unencrypted_private_keys }
@@ -68,6 +71,7 @@ describe "quartermaster" do
 				end
 			end
 		end
+
 		describe "save_encrypted_private_keys with password" do
 			it { expect{qm.save_encrypted_private_keys}.not_to raise_error }
 			describe "should save an encrypted csv.dec file to the PRIVATE folder" do
@@ -97,6 +101,7 @@ describe "quartermaster" do
 				end
 			end
 		end
+
 		describe "save_encrypted_private_keys without password" do
 			subject {qm2}
 			it { expect{qm2.save_encrypted_private_keys}.not_to raise_error }
@@ -129,6 +134,7 @@ describe "quartermaster" do
 				end
 			end
 		end
+
 		describe "save_password with password" do
 			before { qm.save_password }
 			describe "should save a password file to the PRIVATE folder" do
@@ -147,6 +153,7 @@ describe "quartermaster" do
 				end
 			end
 		end
+
 		describe "save_password without password" do
 			describe "should save a password file to the PRIVATE folder" do
 				before do
@@ -166,6 +173,7 @@ describe "quartermaster" do
 				end
 			end
 		end
+
 		describe "save_password_shares" do
 			it { expect{qm.save_password_shares}.not_to raise_error }
 			describe "should save a csv file to the PRIVATE folder" do
@@ -197,7 +205,8 @@ describe "quartermaster" do
 			end
 		end
 	end
+
 	after(:all) do
-		nuke_coldstorage_dirs_on_usb
+		nuke_coldstorage_files
 	end
 end
