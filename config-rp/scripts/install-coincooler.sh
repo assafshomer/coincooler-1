@@ -49,9 +49,11 @@ sudo cp ~/coincooler/config-rp/launchers/coincooler.desktop /usr/share/raspi-ui-
 read -d '' String <<"EOF"
 # coincooler
 source .aliases
-if [ ! -f /home/pi/coincooler/tmp/pids/server.pid ]; then
-    coincooler
+read -p "  Launch CoinCooler? (y/n) " ans
+if [[ $ans != "y" ]]; then
+  exit
 fi
+echo
 EOF
 
 # Save to ~/.bashrc
@@ -62,6 +64,9 @@ crontab -l > mycron
 echo "@reboot /home/pi/coincooler/config-rp/scripts/purger.sh" >> mycron
 sudo crontab mycron
 rm mycron
+
+# disable wifi
+echo "dtoverlay=pi3-disable-wifi" >> /boot/config.txt
 
 # Print the time elapsed
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
