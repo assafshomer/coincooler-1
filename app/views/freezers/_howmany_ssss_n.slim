@@ -1,3 +1,2 @@
-- pick = if params[:ssss_n] then params[:ssss_n] else DEFAULT_SSSN end
+- pick = params[:ssss_n] || DEFAULT_SSSN 
 = select_tag(:ssss_n, options_for_select(array,selected: pick ), class: 'pulldown small', onchange: "capSsssK(getSsssN());$('#ssss_k option:eq(0)').prop('selected', true);")
-

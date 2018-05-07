@@ -2,6 +2,6 @@ div#ssssinner
 	| Split password into
 	= render 'howmany_ssss_n', array: (3..SHARES_LIMIT).to_a
 	| shares, require at least
-	- upper = if params[:howmany_ssss_n] then params[:howmany_ssss_n] else SHARES_LIMIT end
+	- upper = params[:howmany_ssss_n] || SHARES_LIMIT
 	= render 'howmany_ssss_k', array: (2..upper).to_a
 	| to recover

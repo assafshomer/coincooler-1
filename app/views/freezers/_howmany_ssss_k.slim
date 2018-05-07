@@ -1,2 +1,2 @@
-- pick = if params[:ssss_k] then params[:ssss_k] else DEFAULT_SSSK end
+- pick = params[:ssss_k] || DEFAULT_SSSK 
 = select_tag(:ssss_k, options_for_select(array,selected: pick ), class: 'pulldown small')

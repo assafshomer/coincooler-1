@@ -1,4 +1,4 @@
 = "Generate "
-- pick = if params[:howmany] then params[:howmany] else KEYS_DEFAULT end
+- pick = params[:howmany] || KEYS_DEFAULT
 = select_tag(:howmany, options_for_select(array,selected: pick ), class: 'pulldown large')
 = " Addresses for Cold Storage"

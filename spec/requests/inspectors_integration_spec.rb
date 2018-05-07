@@ -12,6 +12,7 @@ describe "Inspectors" do
 
 	describe "Full circle encryption and decryption with ssss should fail if not enough shares" do
 		before do
+			check "ssss_on"
 			select 2, from: :howmany
 			select 6, from: :ssss_n
 			select 4, from: :ssss_k
@@ -30,6 +31,7 @@ describe "Inspectors" do
 
 	describe "Full circle encryption and decryption with ssss should succeed if enough shares" do
 		before do
+			check "ssss_on"
 			select 2, from: :howmany
 			select 6, from: :ssss_n
 			select 4, from: :ssss_k

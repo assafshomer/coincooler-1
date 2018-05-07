@@ -13,7 +13,7 @@ class FreezersController < ApplicationController
 		@title=freeze_page_title
 		howmany=params[:howmany].to_i
 		$split = params[:split].to_s
-		$ssss={n: params[:ssss_n].to_i,k: params[:ssss_k].to_i}
+		$ssss = { n: params[:ssss_n].to_i, k: params[:ssss_k].to_i }
 		if valid_params?(howmany,$ssss)
 			keys=KeyGenerator.new(howmany).keys
 			@qm=Quartermaster.new(keys,params[:password].strip,$ssss)
@@ -26,16 +26,22 @@ class FreezersController < ApplicationController
 	end
 
   def show
-    flash.now[:hot] = hot_message if HOT
-  	@password= CSV.read(password_file_path('csv'))[1][0]
-  	@expose=params[:expose]
-  	# sleep 5 if (DEBUG) # this is to make it feel like the PI
-  	@n=$ssss[:n]
-  	@title=private_keys_title
-    @data=CSV.read(private_keys_file_path('csv',false))
-    @keys=build_private_keys_hash_array(@data)
-    @remote = (AJAXON && COPY && all_files_there?)
-    flash.now[:info] = instructions_flash unless @remote
+		begin
+	    flash.now[:hot] = hot_message if HOT
+	  	@password= CSV.read(password_file_path('csv'))[1][0]
+	  	@expose=params[:expose]
+	  	# sleep 5 if (DEBUG) # this is to make it feel like the PI
+	  	@n=$ssss[:n]
+	  	@title=private_keys_title
+	    @data=CSV.read(private_keys_file_path('csv',false))
+	    @keys=build_private_keys_hash_array(@data)
+	    @remote = (AJAXON && COPY && all_files_there?)
+	    flash.now[:info] = instructions_flash unless @remote
+		rescue => e
+			Rails.logger.debug e.message
+			flash[:error]= { message: missing_file_error, id: 'missing_file'}
+			redirect_to home_path
+		end
   end
 
   def download

@@ -54,7 +54,7 @@ class Quartermaster
 		save_public_addresses
 		save_unencrypted_private_keys
 		save_encrypted_private_keys
-		save_password_shares
+		save_password_shares if $split == "yes"
 		save_password
 	end
 

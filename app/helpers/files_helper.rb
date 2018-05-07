@@ -147,7 +147,7 @@ module FilesHelper
 		File.exists?(private_keys_file_path('csv',false)) ||
 		File.exists?(private_keys_file_path('csv',true)) ||
 		File.exists?(password_file_path('csv')) ||
-		!Dir.glob(password_shares_path(1)[0..-(6+$tag.to_s.length)]+'*'+$tag.to_s+'.csv').empty?
+		$split == "yes" ? shares_there? : false
 	end
 
 	def all_files_there?
@@ -155,6 +155,10 @@ module FilesHelper
 		File.exists?(private_keys_file_path('csv',false)) &&
 		File.exists?(private_keys_file_path('csv',true)) &&
 		File.exists?(password_file_path('csv')) &&
+		$split == "yes" ? shares_there? : true
+	end
+
+	def shares_there?
 		!Dir.glob(password_shares_path(1)[0..-(6+$tag.to_s.length)]+'*'+$tag.to_s+'.csv').empty?
 	end
 

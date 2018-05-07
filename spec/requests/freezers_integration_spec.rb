@@ -41,9 +41,9 @@ describe "Freezers" do
 	end
 	describe "views" do
 		before do
+			check "ssss_on"
 			select 2, from: :howmany
 			fill_in 'password', with: 'moooohaha'
-			check('split')
 			select 3, from: :ssss_n
 			select 2, from: :ssss_k
 		  click_button generate_button
