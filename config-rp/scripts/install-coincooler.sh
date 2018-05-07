@@ -55,6 +55,7 @@ read -p "  Launch CoinCooler? (y/n) " ans
 if [[ $ans != "y" ]]; then
   exit
 fi
+coincooler
 echo
 EOF
 
@@ -68,7 +69,7 @@ sudo crontab mycron
 rm mycron
 
 # disable wifi
-echo "dtoverlay=pi3-disable-wifi" >> /boot/config.txt
+sudo sh -c "echo 'dtoverlay=dtoverlay=pi3-disable-wifi' >> /boot/config.txt"
 
 # Print the time elapsed into a log file
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
