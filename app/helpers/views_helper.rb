@@ -5,11 +5,11 @@ module ViewsHelper
 	end
 
 	def full_title(string)
-		if string.to_s.length > 0			
+		if string.to_s.length > 0
 			app_title + " - " + string.to_s
 		else
 			app_title
-		end		
+		end
 	end
 
 	def get_id(file)
@@ -35,7 +35,7 @@ module ViewsHelper
 	end
 	def generate_button_action
 		'Generating Cold Storage Files'
-	end	
+	end
 	def generate_button_title
 		"Generate a list of Bitcoin Addresses and the Private Keys that control them."
 	end
@@ -61,13 +61,13 @@ module ViewsHelper
 	def recover_passwd_placeholder
 		'Enter password'
 		# 'Your cold storage password'
-	end	
+	end
 
 	def shares_placeholder
 		'Or, enter password shares (encrypted files only)'
 		# 'Your cold storage password'
-	end	
-	
+	end
+
 	def inspect_page_title
 		'Upload and Inspect the content of existing cold storage files'
 	end
@@ -79,28 +79,28 @@ module ViewsHelper
 	def uploads_title
 		inspect_page_title
 	end
-	
+
 	def inspect_button
 		'Inspect'
 	end
 	def big_inspect_button
 		'Inspect Existing Files'
-	end	
+	end
 	def upload_button
 		'Upload a File for Inspection'
 	end
 	def upload_button_shares
 		'Upload Password Shares'
-	end	
+	end
 	def upload_button_password
 		'Upload Password File'
-	end		
+	end
 	def recover_button
 		'Inspect cold storage file'
 	end
 	def recover_button_action
 		'preparing file for inspection'
-	end	
+	end
 	def recover_button_title
 		"Inpsect the content of the cold storage file you just uploaded"
 	end
@@ -117,7 +117,7 @@ module ViewsHelper
 	def freeze_page_header
 		'Generate Cold Storage files'
 	end
-	
+
 	def freeze_button
 		'Generate'
 	end
@@ -126,21 +126,21 @@ module ViewsHelper
 	end
 	def big_freeze_button_title
 		'Generate cold storage files listing new Bitcoin Addresses and Private Keys'
-	end	
+	end
 	def freeze_button_title
 		freeze_page_title
 	end
-	
+
 	def addresses_title
 		'Bitcoin Addresses'
 	end
-	
+
 	def private_keys_title
 		'Private Keys'
 	end
 
 	def enter_password_placeholder
-		'Override our strong password with your own? (optional)'	
+		'Override our strong password with your own? (optional)'
 		# 'Your Password (optional)'
 	end
 
@@ -191,7 +191,7 @@ module ViewsHelper
 	end
 	def download_upload_button
 		'Download File'
-	end	
+	end
 	def home_link_title
 		'CoinCooler Home page'
 	end
@@ -215,11 +215,11 @@ module ViewsHelper
 	end
 	def download_upload_title
 		if COPY
-			'Save this file to a USB drive'	
+			'Save this file to a USB drive'
 		else
 			'Download this file'
-		end		
-	end		
+		end
+	end
 	def qr_button_title
 		if PI
 			"Show QR code (slow, takes about 25 seconds)"
@@ -266,39 +266,39 @@ module ViewsHelper
 	end
 	def row_success_copy_suffix
 		success_copy_suffix[5..-1]
-	end	
+	end
 	def success_copy_title(string='')
 		"The file was copied to the USB flash drive in a directory named: #{string}"
-	end	
+	end
 	def download_addresses_title
 		if COPY
-			'Save a file containing the list of Addresses to a USB drive'	
+			'Save a file containing the list of Addresses to a USB drive'
 		else
 			'Download a file containing the list of Addresses'
-		end		
+		end
 	end
 	def download_unencrypted_title
 		if COPY
-			"Save the list of PRIVATE KEYS and Addresses to a USB drive, NON-ENCRYPTED"	
+			"Save the list of PRIVATE KEYS and Addresses to a USB drive, NON-ENCRYPTED"
 		else
 			"Download an UNENCRYPTED list of PRIVATE KEYS and Addresses"
-		end		
+		end
 	end
 	def download_keys_title
 		if COPY
-			"Save files containing the list of PRIVATE KEYS to a USB drive"			
+			"Save files containing the list of PRIVATE KEYS to a USB drive"
 		else
-			"Download files containing the list of PRIVATE KEYS"			
+			"Download files containing the list of PRIVATE KEYS"
 		end
 	end
 	def pbkdf_alert_message
-		'This action is slow on purpose for enhanced security. Please wait (up to 1 minute).'
+		'Please wait....'
 	end
 	def pbkdf_alert_prefix
 		'To protect against brute force attacks your password is processed '
 	end
 	def pbkdf_alert_suffix
-		' times through a Password Based Key Derivation Function (PBKDF)'			
+		' times through a Password Based Key Derivation Function (PBKDF)'
 	end
 	def pbkdf_alert_title
 		pbkdf_alert_prefix+PBKDF2_ITERATIONS.to_s+pbkdf_alert_suffix
@@ -316,10 +316,10 @@ module ViewsHelper
   	" #{if COPY then "Save" else "Download" end} an encrypted file containing this list of PRIVATE KEYS and Addresses #{" to a USB drive" if COPY}"
   end
   def download_password_title
-  	" #{if COPY then "Save" else "Download" end} a file containing the password #{" to a USB drive" if COPY}" 
+  	" #{if COPY then "Save" else "Download" end} a file containing the password #{" to a USB drive" if COPY}"
   end
   def download_unencrypted_title
   	" #{if COPY then "Save" else "Download" end} a non-encrypted file containing this list of PRIVATE KEYS and Addresses #{" to a USB drive" if COPY}"
   end
-  
+
 end

@@ -52,13 +52,12 @@ class FreezersController < ApplicationController
   			download_files
   		end
 		rescue => e
-			Rails.logger.info('* * * * * *'+e.to_s)
-			if e.to_s.scan(/Input\/output error - \/media\/usb\d+\/Cold_Storage/).blank?
-				logger.warn(e.to_s)
-				flash[:error]= {message: missing_file_error,id: 'missing_file'}
+			if e.message.scan(/Input\/output error/).blank?
+				logger.error(e.message)
+				flash[:error]= { message: missing_file_error, id: 'missing_file' }
 				redirect_to home_path
 			else
-				flash[:danger] = {message: no_usb_message,title: 'Insert a USB drive', id:'no_usb'}
+				flash[:danger] = { message: no_usb_message, title: 'Insert a USB drive', id: 'no_usb' }
 				redirect_to new_keys_path
 			end
 		end
