@@ -9,4 +9,4 @@ Insert a USB stick
 
 # Installation on a Raspberry PI
 - Get a Raspberry Pi
-- 
+- Install Raspbian 
