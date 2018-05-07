@@ -51,7 +51,7 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    nuke_coldstorage_directory
+    nuke_coldstorage_dirs_on_usb
   end
 end
 

@@ -5,11 +5,11 @@ include CryptoHelper
 
 describe "quartermaster" do
 	before do
-		nuke_coldstorage_directory
+		nuke_coldstorage_dirs_on_usb
 	end
 	describe "init" do
 		it {expect {Quartermaster.new([1])}.to raise_error(ArgumentError, /wrong number of arguments/)}
-		it {expect {Quartermaster.new}.to raise_error(ArgumentError, /wrong number of arguments/)}		
+		it {expect {Quartermaster.new}.to raise_error(ArgumentError, /wrong number of arguments/)}
 		it {expect {Quartermaster.new([1],'a',{n:3, k:2}) }.to raise_error(RuntimeError, 'Invalid keys')}
 		it {expect {Quartermaster.new([],'b',{n:3, k:2}) }.to raise_error(RuntimeError, 'Invalid keys')}
 	end
@@ -170,7 +170,7 @@ describe "quartermaster" do
 			it { expect{qm.save_password_shares}.not_to raise_error }
 			describe "should save a csv file to the PRIVATE folder" do
 				before do
-					clear_coldstorage_files
+					clear_coldstorage_files_locally
 				  qm.save_password_shares
 				end
 				3.times do |n|
@@ -198,6 +198,6 @@ describe "quartermaster" do
 		end
 	end
 	after(:all) do
-		nuke_coldstorage_directory
+		nuke_coldstorage_dirs_on_usb
 	end
 end

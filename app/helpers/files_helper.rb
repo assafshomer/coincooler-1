@@ -37,6 +37,7 @@ module FilesHelper
 			end
 		end
 	end
+
 	def save_enum_csv(path,header_array,data_nested_array, start_position=1)
 		path = File.expand_path path
 		dirpath = File.dirname(path)
@@ -49,6 +50,7 @@ module FilesHelper
 			end
 		end
 	end
+
 	def addresses_csv_format?(csv_data)
 		return false unless csv_data.kind_of?(Array)
 		return false if csv_data[0][0]!="#"
@@ -59,6 +61,7 @@ module FilesHelper
 		return false unless Bitcoin::valid_address?(csv_data[1][1])
 		true
 	end
+
 	def private_keys_csv_format?(csv_data)
 		return false unless csv_data.kind_of?(Array)
 		return false if csv_data[0][0]!="#"
@@ -71,6 +74,7 @@ module FilesHelper
 		return false unless Bitcoin::Key.from_base58(csv_data[1][2]).addr == csv_data[1][1]
 		true
 	end
+
 	def share_csv_format?(csv_data)
 		return false unless csv_data.kind_of?(Array)
 		return false unless csv_data[0].kind_of?(Array)
@@ -79,6 +83,7 @@ module FilesHelper
 		return false if csv_data[1][0].blank?
 		true
 	end
+
 	def password_csv_format?(csv_data)
 		return false unless csv_data.kind_of?(Array)
 		return false unless csv_data[0].kind_of?(Array)
@@ -105,28 +110,31 @@ module FilesHelper
 	def nuke_stale_uploads(path_array=get_stale_uploads_array)
 		path_array.each {|p| FileUtils.rm_rf(p)}
 	end
+
 	def nuke_all_uploads
 		FileUtils.rm_rf(jquery_uploads_dir)
 	end
-  def clear_stale_uploads
+
+	def clear_stale_uploads
     nuke_stale_uploads
     Upload.all.each {|u| u.destroy unless file_there?(u.upload.path)} if Upload.count>0
   end
-  def nuke_all_uploads_on_rp
+
+	def nuke_all_uploads_on_rp
   	nuke_all_uploads if PI
   end
-	def nuke_coldstorage_directory
-		# system("srm -r #{coldstorage_directory}*") too slow on the rp
-		FileUtils.rm_rf(Dir["#{usb_path}#{cold_storage_directory_prefix}*"])
+
+	def nuke_coldstorage_dirs_on_usb
+		secure_delete "#{usb_path}#{cold_storage_directory_prefix}"
 		nuke_all_uploads
 	end
 
-	def clear_coldstorage_files(usb=false)
-		delete_file(public_addresses_file_path('csv',usb))
-		delete_file(private_keys_file_path('csv',false,usb))
-		delete_file(private_keys_file_path('csv',true,usb))
-		delete_file(password_file_path('csv',usb))
-		FileUtils.rm Dir[password_shares_path(1,usb)[0..-($tag.to_s.length+6)]+'*.csv']
+	def clear_coldstorage_files_locally
+		secure_delete coldstorage_directory
+	end
+
+	def secure_delete(dir_path)
+		TEST ? FileUtils.rm_rf(Dir["#{dir_path}*"]) : system("srm -r #{dir_path}*")
 	end
 
 	def files_exist?

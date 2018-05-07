@@ -6,7 +6,7 @@ include FilesHelper
 describe "Inspectors" do
 	subject { page }
 	before do
-		nuke_coldstorage_directory
+		nuke_coldstorage_dirs_on_usb
 	  visit freeze_path
 	end
 
@@ -90,6 +90,6 @@ describe "Inspectors" do
 	end
 
 	after(:all) do
-		nuke_coldstorage_directory
+		nuke_coldstorage_dirs_on_usb
 	end
 end
