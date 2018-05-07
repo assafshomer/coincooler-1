@@ -70,6 +70,9 @@ rm mycron
 # disable wifi
 echo "dtoverlay=pi3-disable-wifi" >> /boot/config.txt
 
-# Print the time elapsed
+# Print the time elapsed into a log file
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
-echo -e "\nFinished in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n"
+echo "\nFinished in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n" >> ~/Documents/coincooler-installation.log
+
+# reboot
+sudo reboot
