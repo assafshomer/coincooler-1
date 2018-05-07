@@ -7,10 +7,11 @@
 # Time the install process
 START_TIME=$SECONDS
 
-# Install git + dependencies
-# See: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
+# update distro
 sudo apt update
 sudo apt upgrade
+
+# Install git + dependencies
 sudo apt install -y git autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
 
 # Check out rbenv into ~/.rbenv
@@ -47,4 +48,7 @@ echo "  source ~/.bashrc"
 
 # Print the time elapsed
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
-echo -e "\nFinished in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n"
+echo "\nRuby Installation Completed in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n" >> ~/Documents/ruby-installation.log
+
+# reboot
+sudo reboot
