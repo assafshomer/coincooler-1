@@ -44,6 +44,8 @@ bundle exec rspec spec
 sudo cp ~/coincooler/config-rp/launchers/.aliases ~/.aliases
 sudo cp ~/coincooler/config-rp/launchers/CoinCooler ~/Desktop
 sudo cp ~/coincooler/config-rp/launchers/coincooler.desktop /usr/share/raspi-ui-overrides/applications
+sudo mv /usr/share/rpd-wallpaper/road.jpg /usr/share/rpd-wallpaper/road.jpg.old
+sudo cp ~/coincooler/app/assets/images/Bitcoin_in_ice_transparent_bgd.png /usr/share/rpd-wallpaper/road.jpg
 
 # quicklaunch hack
 read -d '' String <<"EOF"
