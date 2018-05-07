@@ -46,12 +46,14 @@ RSpec.configure do |config|
   config.filter_run_excluding :disabled => true
 
   config.before(:suite) do
+    return if ENV['CI'].present?
     message = "Please insert a USB stick without spaces in it's name"
-    fail message unless (usb_attached? || ENV['CI'].present)
+    fail message unless usb_attached?
     nuke_coldstorage_files
   end
 
   config.after(:suite) do
+    return if ENV['CI'].present?
     nuke_coldstorage_files
   end
 end
