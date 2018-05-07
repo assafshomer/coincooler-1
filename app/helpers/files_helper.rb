@@ -130,6 +130,7 @@ module FilesHelper
 	end
 
 	def clear_coldstorage_dirs_on_usb
+		return if PROD
 		secure_delete "#{usb_path}#{cold_storage_directory_prefix}"
 	end
 

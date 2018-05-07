@@ -2,7 +2,8 @@ class FreezersController < ApplicationController
 	require 'rqrcode'
 	before_filter :clear_pk, only: [:create, :show]
 	before_filter :clear_flash_messages
-	before_filter	:redirect_home,						only: [:show, :download]
+	before_filter :nuke_coldstorage_files, only: :new
+	before_filter	:redirect_home,	only: [:show, :download]
 
   def new
 		@title=freeze_page_title
