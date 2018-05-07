@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Link
+Name=CoinCooler
+Icon=/home/pi/coincooler/app/assets/images/coincooler.ico
+URL=/usr/share/raspi-ui-overrides/applications/coincooler.desktop
+Terminal=false
+Exec=
+Path=/home/pi

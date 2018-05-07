@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=CoinCooler
+Comment=Bitcoin Cold Storage
+TryExec=lxterminal
+Exec=lxterminal
+Icon=/home/pi/coincooler/app/assets/images/coincooler.ico
+Type=Application
+StartupNotify=true
+Categories=GTK;Utility;
