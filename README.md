@@ -16,16 +16,40 @@ Insert a USB stick
     - `wget --content-disposition https://downloads.raspberrypi.org/raspbian_latest`
     - visit [this link](https://www.raspberrypi.org/downloads/raspbian/) to find the SHA-256 hash and verify that you downloaded the correct package by running
     - `echo "the-expected-hash yyyy-mm-dd-raspbian-stretch.zip" | shasum -a 256 -c -`
-    - For example, if you downloaded the file "2018-04-18-raspbian-stretch.zip" and the expected sha-256 hash, as it appears on raspberrypi.org website, is "0e2922e551a895b136f2ea83d1bc0ca71e016e6d50244ba3da52bd764df5d1b6" then you should be running `echo "0e2922e551a895b136f2ea83d1bc0ca71e016e6d50244ba3da52bd764df5d1b6  2018-04-18-raspbian-stretch.zip" | shasum -a 256 -c -`
+    - For example, if you downloaded the file "2018-04-18-raspbian-stretch.zip" and the expected sha-256 hash, as it appears on raspberrypi.org website, is "0e2922e551a895b136f2ea83d1bc0ca71e016e6d50244ba3da52bd764df5d1b6" then you should be running
+    ```
+      echo "0e2922e551a895b136f2ea83d1bc0ca71e016e6d50244ba3da52bd764df5d1b6  2018-04-18-raspbian-stretch.zip" | shasum -a 256 -c -
+    ```
     - If all is well you should see that this is the correct hash.
     - Now, unzip the file
     - `unzip yyyy-mm-dd-raspbian-stretch.zip`
+    - You should be left with a `unzip yyyy-mm-dd-raspbian-stretch.img` file in the same location
     - Now stick a 16gb sd card into your laptop (usually using a dedicated connector)
     - We need to find out the name of the sd card, so run
     - `sudo diskutil list | grep external`
-    - 
-
-- Power your Pi on and open a terminal window
+    - The response should be something like `dev/disk2 (external, physical):`, which tells us that the name of our SD card is `dev/disk2`.
+    - Now we copy the `unzip yyyy-mm-dd-raspbian-stretch.img` file onto the SD card
+    - First unmount the SD card
+    - `diskutil unmountDisk /dev/disk2`
+    - Now copy
+    - `sudo dd if=yyyy-mm-dd-raspbian-stretch.img | pv -s 5G | sudo dd of=/dev/disk2 bs=1m`
+    - You may need to adjust the above to match the name of your specific image file, the size of the image file (so the above 5G is so that the process-bar matches the size of the actual file, this is a nice to have but not necessary), and the name of the sd card that was derived in the previous step. This step will take some time.
+    - Finally, we need to enable wifi connection on the raspberrypi so to do that type
+    - `nano /Volumes/boot/wpa_supplicant.conf`
+    - paste the following into the file (and ammend it appropriately by replacing your two letter country code, wifi network name and password)
+    ```
+      country=YOUR-TWO-LETTER-COUNTRY-CODE
+      ctrl_interface=/var/run/wpa_supplicant GROUP=netdev
+      update_config=1
+      network={
+         ssid="NAME_OF_YOUR_WIFI_NETWORK"
+         psk="YOUR_WIFI_PASSWORD"
+      }
+    ```
+  - hit CTRL+X to save the file
+  - Unmount the SD card `diskutil unmountDisk /dev/disk2`
+- insert the SD card into your PI and power it 
+- on and open a terminal window
 - Make sure it is connected to the internet
 - Insert a formatted USB stick (formatted to "MS DOS (FAT)"). Required for the tests after installation
 - visit https://gist.github.com/assafshomer/32fe98096e52c176e5dfbbf1dd92d2bf and follow instructions

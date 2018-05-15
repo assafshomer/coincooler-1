@@ -69,8 +69,8 @@ sudo crontab mycron
 rm mycron
 
 # disable wifi and bluetooth
-sudo sh -c "echo 'dtoverlay=dtoverlay=pi3-disable-wifi' >> /boot/config.txt"
-sudo sh -c "echo 'dtoverlay=dtoverlay=pi3-disable-bt' >> /boot/config.txt"
+sudo sh -c "echo 'dtoverlay=pi3-disable-wifi' >> /boot/config.txt"
+sudo sh -c "echo 'dtoverlay=pi3-disable-bt' >> /boot/config.txt"
 
 # let hardware rng contribute to kernel's randomness pool
 echo bcm2835_rng | sudo tee /etc/modules-load.d/rng-tools.conf
