@@ -52,8 +52,12 @@ Insert a USB stick
 - Connect the pi to the internet (if you followed the detailed instructions above it should be connected)
 - Insert a formatted USB stick (formatted to "MS DOS (FAT)"). Required for the tests after installation
 - Visit https://gist.github.com/assafshomer/32fe98096e52c176e5dfbbf1dd92d2bf and follow instructions, or:
-  - Launch a terminal window and run the following command (take about 15 minutes to run and should reboot when done)
+  - Launch a terminal window and run the following command (takes about 15 minutes to run and should reboot when done)
   - `bash <(curl -s https://raw.githubusercontent.com/assafshomer/rpcc/master/config-rp/scripts/install-ruby.sh)`
   - After the reboot launch a new terminal window and run the following command (again, should take some time and end with a reboot)
   - `bash <(curl -s https://raw.githubusercontent.com/assafshomer/rpcc/master/config-rp/scripts/install-coincooler.sh)`
   - After this second reboot you should be done. Click on the CoinCooler desktop icon and wait for about 20 seconds for the application to start
+
+# FAQ and Tutorials
+- Visit [coincooler FAQ](http://www.coincooler.com/faq) and [coincooler Help](http://www.coincooler.com/help) pages
+- Visit CoinCooler dedicated [YouTube channel](https://www.youtube.com/channel/UCfHCo_-YDaKQmc9qT8BVxGQ)
