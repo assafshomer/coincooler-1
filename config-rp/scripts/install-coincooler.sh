@@ -12,7 +12,7 @@ sudo sed -i 's/raspberrypi/coincooler/g' /etc/hostname
 sudo sed -i 's/raspberrypi/coincooler/g' /etc/hosts
 
 # install nodejs js runtime, sqlite and srm
-sudo apt install -y nodejs libsqlite3-dev secure-delete
+sudo apt install -y nodejs libsqlite3-dev secure-delete xdotool
 
 # fix issue with openssl support a-la https://github.com/oleganza/btcruby/issues/29
 sudo ln -nfs /usr/lib/arm-linux-gnueabihf/libssl.so.1.0.2 /usr/lib/arm-linux-gnueabihf/libssl.so
@@ -68,8 +68,17 @@ echo "@reboot /home/pi/coincooler/config-rp/scripts/purger.sh" >> mycron
 sudo crontab mycron
 rm mycron
 
-# disable wifi
+# disable wifi and bluetooth
 sudo sh -c "echo 'dtoverlay=dtoverlay=pi3-disable-wifi' >> /boot/config.txt"
+sudo sh -c "echo 'dtoverlay=dtoverlay=pi3-disable-bt' >> /boot/config.txt"
+
+# let hardware rng contribute to kernel's randomness pool
+echo bcm2835_rng | sudo tee /etc/modules-load.d/rng-tools.conf
+sudo modprobe bcm2835_rng
+sudo apt install rng-tools
+echo 'HRNGDEVICE=/dev/hwrng' | sudo tee --append /etc/default/rng-tools
+sudo systemctl enable rng-tools
+sudo systemctl start rng-tools
 
 # Print the time elapsed into a log file
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
