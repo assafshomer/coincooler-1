@@ -14,7 +14,7 @@ Insert a USB stick
   - If you have some tech background you can also follow the follwoing instructions (given for mac but should be straightforwardly translatable to other environments as well):
     - `cd Downloads`
     - `wget --content-disposition https://downloads.raspberrypi.org/raspbian_latest`
-    - visit [this link](https://www.raspberrypi.org/downloads/raspbian/) to find the SHA-256 hash and verify that you downloaded the correct package by running
+    - Visit [this link](https://www.raspberrypi.org/downloads/raspbian/) to find the SHA-256 hash and verify that you downloaded the correct package by running
     - `echo "the-expected-hash yyyy-mm-dd-raspbian-stretch.zip" | shasum -a 256 -c -`
     - For example, if you downloaded the file "2018-04-18-raspbian-stretch.zip" and the expected sha-256 hash, as it appears on raspberrypi.org website, is "0e2922e551a895b136f2ea83d1bc0ca71e016e6d50244ba3da52bd764df5d1b6" then you should be running
     ```
@@ -36,7 +36,7 @@ Insert a USB stick
     - You may need to adjust the above to match the name of your specific image file, the size of the image file (so the above 5G is so that the process-bar matches the size of the actual file, this is a nice to have but not necessary), and the name of the sd card that was derived in the previous step. This step will take some time.
     - Finally, we need to enable wifi connection on the raspberrypi so to do that type
     - `nano /Volumes/boot/wpa_supplicant.conf`
-    - paste the following into the file (and ammend it appropriately by replacing your two letter country code, wifi network name and password)
+    - Paste the following into the file (and ammend it appropriately by replacing your two letter country code, wifi network name and password)
     ```
       country=YOUR-TWO-LETTER-COUNTRY-CODE
       ctrl_interface=/var/run/wpa_supplicant GROUP=netdev
@@ -48,8 +48,12 @@ Insert a USB stick
     ```
   - hit CTRL+X to save the file
   - Unmount the SD card `diskutil unmountDisk /dev/disk2`
-- insert the SD card into your PI and power it 
-- on and open a terminal window
-- Make sure it is connected to the internet
+- Insert the SD card into your PI and power it on
+- Connect the pi to the internet (if you followed the detailed instructions above it should be connected)
 - Insert a formatted USB stick (formatted to "MS DOS (FAT)"). Required for the tests after installation
-- visit https://gist.github.com/assafshomer/32fe98096e52c176e5dfbbf1dd92d2bf and follow instructions
+- Visit https://gist.github.com/assafshomer/32fe98096e52c176e5dfbbf1dd92d2bf and follow instructions, or:
+  - Launch a terminal window and run the following command (take about 15 minutes to run and should reboot when done)
+  - `bash <(curl -s https://raw.githubusercontent.com/assafshomer/rpcc/master/config-rp/scripts/install-ruby.sh)`
+  - After the reboot launch a new terminal window and run the following command (again, should take some time and end with a reboot)
+  - `bash <(curl -s https://raw.githubusercontent.com/assafshomer/rpcc/master/config-rp/scripts/install-coincooler.sh)`
+  - After this second reboot you should be done. Click on the CoinCooler desktop icon and wait for about 20 seconds for the application to start
