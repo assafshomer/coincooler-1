@@ -16,7 +16,7 @@ Insert a USB stick
     - `wget --content-disposition https://downloads.raspberrypi.org/raspbian_latest`
     - Visit [this link](https://www.raspberrypi.org/downloads/raspbian/) to find the SHA-256 hash and verify that you downloaded the correct package by running
     - `echo "the-expected-hash yyyy-mm-dd-raspbian-stretch.zip" | shasum -a 256 -c -`
-    - For example, if you downloaded the file "2018-04-18-raspbian-stretch.zip" and the expected sha-256 hash, as it appears on raspberrypi.org website, is "0e2922e551a895b136f2ea83d1bc0ca71e016e6d50244ba3da52bd764df5d1b6" then you should be running
+    - For example, if you downloaded the file "2018-04-18-raspbian-stretch.zip" and the expected sha-256 hash, as it appears on raspberrypi.org website, is "0e2922e551a895b136f2ea83d1bc0ca71e016e6d50244ba3da52bd764df5d1b6" then you should be running (note the **double space** between the expecte sha and the zipped filename)
     ```
       echo "0e2922e551a895b136f2ea83d1bc0ca71e016e6d50244ba3da52bd764df5d1b6  2018-04-18-raspbian-stretch.zip" | shasum -a 256 -c -
     ```
