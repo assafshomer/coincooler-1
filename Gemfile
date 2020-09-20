@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.1'
+ruby '2.5.5'
 
 gem 'rails', '4.2.10'
 gem 'bootstrap-sass', '2.3.0.1'
@@ -20,7 +20,7 @@ gem 'jbuilder', '1.0.1'
 gem 'jquery-fileupload-rails', '0.4.1'
 gem 'paperclip', '4.1.1'
 gem 'twitter-bootstrap-rails', '2.2.8'
-gem 'ffi', '1.9.23'
+gem 'ffi', '1.9.25'
 
 group :development, :test do
   gem 'rspec-rails', '2.14.1'
