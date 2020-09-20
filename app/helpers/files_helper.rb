@@ -71,7 +71,12 @@ module FilesHelper
 		return false if csv_data[1][0]!="1"
 		return false if csv_data[1][3]!=nil
 		return false unless Bitcoin::valid_address?(csv_data[1][1])
-		return false unless Bitcoin::Key.from_base58(csv_data[1][2]).addr == csv_data[1][1]
+		# bug in Bitcoin::Key
+		# > key = Bitcoin::Key.generate
+		# > pk = key.to_base58
+		# > Bitcoin::Key.from_base58(pk)
+		# CRASH
+		# return false unless Bitcoin::Key.from_base58(csv_data[1][2]).addr == csv_data[1][1]
 		true
 	end
 
