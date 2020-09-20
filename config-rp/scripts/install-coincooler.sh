@@ -72,6 +72,6 @@ ELAPSED_TIME=$(($SECONDS - $START_TIME))
 echo "\nFinished in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n" >> ~/Documents/coincooler-installation.log
 
 read -p "  Reboot RaspberryPi (y/n) " ans
-if [[ $ans != "y" ]]; then
+if [[ $ans = "y" ]]; then
   sudo reboot
 fi
